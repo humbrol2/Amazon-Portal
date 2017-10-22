@@ -1,0 +1,20 @@
+{% extends 'home/base.html' %}
+{% block body %}
+<form id="category_form" method="post" action="/coa/add_coa/">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                <div class="row text-right">
+                    <div class="col-sm-2">{{field.label}}</div>
+                <div class="col-sm-2" align-left>{{ field }} </div>
+                </div>
+            {% endfor %}
+
+            <input type="submit"  name="submit" value="Enter COA" />
+</form>
+{% endblock %}

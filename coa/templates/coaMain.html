@@ -1,0 +1,42 @@
+{% extends 'home/base.html' %}
+
+{% block body %}
+{% load render_table from django_tables2 %}
+{% load static %}
+
+   <div class="row panel-sucess text-left col-sm-12">
+      <h1>COA results for {{ facility }} week to date.</h1> <br>
+   </div>
+   <div class="row" >
+
+   </div>
+   <div class="row">
+      <div class="col-md-2" >
+       Complete: {{coaWeekToDate }}<br>
+      </div>
+       <div class="col-md-2">
+       Goal: {{ coaGoal }}<br>
+      </div>
+
+   </div>
+   <div class="row">
+      <div class="col-md-2">
+      Percent Complete: {% widthratio coaWeekToDate coaGoal 100 %}%<br>
+      </div>
+      <div class="progress mw-100" style="width: 20%;">
+         <div class="progress-bar" role="progressbar" aria-valuenow="{{ coaWeekToDate }}" aria-valuemin="0" aria-valuemax="100" style="width:{% widthratio coaWeekToDate coaGoal 100 %}%">
+            {% widthratio coaWeekToDate coaGoal 100 %}% completed.
+      </div>
+      </div>
+
+    </div>
+    <div class="row>
+        <div class="col-sm-2"></div>
+        <div style="width: 500px; height: 500px; overflow-y: scroll;">
+         {% render_table coaTable %}
+        </div>
+
+
+
+
+{% endblock %}
